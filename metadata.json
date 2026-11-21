@@ -1,0 +1,6 @@
+{
+  "name": "LandlordOS MVP v0.1",
+  "description": "Universal South African rental-management operating system for independent landlords and property managers. Supports offline administration, traceable ZAR ledger, receipts, and optional tenant portal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

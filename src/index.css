@@ -1,0 +1,66 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --brand-blue: #0145F2;
+    --brand-blue-light: #E7F0FF;
+    --bg-light: #EDF1F5;
+    --surface-light: #F5F7FA;
+    --card-light: #FFFFFF;
+    --border-light: #E4E9F0;
+    --text-light: #111318;
+    --text-secondary-light: #5A606D;
+    --icon-box-light: #CCE0FC;
+    --badge-occupied-bg-light: #D6E5FA;
+    --badge-occupied-text-light: #0145F2;
+    --badge-overdue-bg-light: #FFE8F8;
+    --badge-overdue-text-light: #E5252A;
+    --bg-dark: #000000;
+    --surface-dark: #111113;
+    --surface-dark-elevated: #1C1C1E;
+    --border-dark: #262B31;
+    --text-dark: #FFFFFF;
+    --text-secondary-dark: #A1A1AA;
+    --icon-box-dark: #042D7D;
+    --badge-occupied-bg-dark: #072156;
+    --badge-occupied-text-dark: #DCE8FF;
+    --badge-overdue-bg-dark: #531618;
+    --badge-overdue-text-dark: #FFD8D8;
+    --font-sans: 'Inter', 'Noto Sans Ethiopic', -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-display: 'Sora', 'Inter', 'Noto Sans Ethiopic', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'SF Mono', 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  .font-mono, .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
