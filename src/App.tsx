@@ -149,7 +149,7 @@ export default function App() {
   }
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <AppShell
         settings={settings}
         properties={properties}
