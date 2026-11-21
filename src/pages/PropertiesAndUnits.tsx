@@ -29,6 +29,7 @@ import {
 } from '../utils/format';
 import type { QuickAddTab } from '../components/QuickAddModal';
 import { tFormat, useLanguagePreference } from '../components/DesignSystem';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 type PropertyFilterTab = 'all' | 'occupied' | 'vacant' | 'overdue';
 
@@ -311,7 +312,7 @@ export const PropertyDirectoryScreen: React.FC<{
                   {/* Left Rectangular Architectural Thumbnail (153x134 ratio -> 73px x 64px) */}
                   <div className="w-[73px] h-[64px] rounded-[13px] overflow-hidden shrink-0 bg-transparent">
                     <img
-                      src={thumbSrc}
+                      src={resolveAssetUrl(thumbSrc)}
                       alt={property.name}
                       className="w-full h-full object-cover"
                     />
@@ -425,7 +426,7 @@ export const PropertyDetailScreen: React.FC<{
         <div className="flex items-center gap-3.5">
           {property.thumbnailUrl && (
             <img
-              src={property.thumbnailUrl}
+              src={resolveAssetUrl(property.thumbnailUrl)}
               alt={property.name}
               className="w-16 h-14 rounded-xl object-cover shrink-0"
             />

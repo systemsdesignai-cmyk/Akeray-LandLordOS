@@ -14,16 +14,35 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Akarai" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="48x48" href="/akarai-icon-48.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/akarai-icon-32.png" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%akarai-icon-180.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="%BASE_URL%akarai-icon-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%BASE_URL%akarai-icon-32.png" />
+    <link rel="shortcut icon" type="image/png" href="%BASE_URL%akarai-icon-32.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Sora:wght@600;700&display=swap"
       rel="stylesheet"
     />
+    <script>
+      // Restore nested routes redirected via public/404.html on GitHub Pages
+      (function (l) {
+        if (l.search[1] === '/') {
+          var decoded = l.search
+            .slice(1)
+            .split('&')
+            .map(function (s) {
+              return s.replace(/~and~/g, '&');
+            })
+            .join('?');
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
     <script>
       (function () {
         try {

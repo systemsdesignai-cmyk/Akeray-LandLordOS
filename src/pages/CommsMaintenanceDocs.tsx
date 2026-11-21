@@ -44,6 +44,7 @@ import {
 } from '../utils/format';
 import type { QuickAddTab } from '../components/QuickAddModal';
 import { db } from '../db/database';
+import { resolveAssetUrl } from '../utils/assetUrl';
 import {
   DSButton,
   DSCard,
@@ -461,7 +462,7 @@ export const MaintenanceBoardScreen: React.FC<{
               {ticket.photoUrls.length > 0 && (
                 <div className="h-36 bg-[#E6ECF3] dark:bg-[#1C1F26] relative overflow-hidden">
                   <img
-                    src={ticket.photoUrls[0]}
+                    src={resolveAssetUrl(ticket.photoUrls[0])}
                     alt={ticket.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
@@ -605,7 +606,7 @@ export const MaintenanceTicketDetailScreen: React.FC<{
                   className="rounded-[14px] overflow-hidden border border-[#E6ECF3] dark:border-[#262B31] bg-[#F5F7FA] dark:bg-[#1C1F26] h-48 relative"
                 >
                   <img
-                    src={url}
+                    src={resolveAssetUrl(url)}
                     alt={`Maintenance evidence ${idx + 1}`}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"

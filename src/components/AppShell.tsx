@@ -35,6 +35,7 @@ import type {
 import { db } from '../db/database';
 import type { QuickAddTab } from './QuickAddModal';
 import { formatZAR } from '../utils/format';
+import { resolveAssetUrl } from '../utils/assetUrl';
 import { DSFAB, SUPPORTED_LANGUAGES, useLanguagePreference } from './DesignSystem';
 import {
   getSidebarNavigationGroups,
@@ -64,7 +65,7 @@ export const LandlordOSLogoSymbol: React.FC<{ className?: string }> = ({
   className = 'w-[34px] h-[34px]',
 }) => (
   <img
-    src="/akarai-symbol.png"
+    src={resolveAssetUrl('akarai-symbol.png')}
     alt="Akarai symbol"
     className={`object-contain rounded-[9px] select-none ${className}`}
     draggable={false}
@@ -79,7 +80,7 @@ export const AkaraiHorizontalBrandLogo: React.FC<{ className?: string }> = ({
 }) => (
   <div className="inline-flex items-center px-2.5 py-1 rounded-[12px] bg-[#FFFFFF] dark:bg-[#FFFFFF] border border-[#E6ECF3] dark:border-[#262B31] shadow-[0_1px_4px_rgba(11,27,59,0.06)]">
     <img
-      src="/akarai-logo-horizontal.png"
+      src={resolveAssetUrl('akarai-logo-horizontal.png')}
       alt="Akarai — Property & Rent Management"
       className={`object-contain select-none ${className}`}
       draggable={false}

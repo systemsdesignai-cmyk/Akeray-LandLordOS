@@ -5,17 +5,21 @@ import path from 'path';
 import {defineConfig} from 'vite';
 import {VitePWA} from 'vite-plugin-pwa';
 
-export default defineConfig(() => {
+export default defineConfig(({ command, isPreview }) => {
+  const base =
+    process.env.VITE_BASE_PATH ??
+    (command === 'build' || isPreview ? '/Akeray-LandLordOS/' : '/');
+
   return {
-    base: '/Akeray-LandLordOS/',
+    base,
     plugins: [
       react(),
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
+        injectRegister: 'auto',
+        scope: base,
         includeAssets: [
-          'icon.svg',
-          'apple-touch-icon.png',
           'akarai-icon-32.png',
           'akarai-icon-48.png',
           'akarai-icon-180.png',
@@ -27,48 +31,46 @@ export default defineConfig(() => {
           'akarai-logo-vertical.png',
           'akarai-logo-horizontal.png',
           'akarai-symbol.png',
-          'pwa-192x192.png',
-          'pwa-512x512.png',
-          'pwa-maskable-192x192.png',
-          'pwa-maskable-512x512.png',
+          'apple-touch-icon.png',
+          'favicon-32x32.png',
         ],
         manifest: {
-          id: '/',
+          id: base,
           name: 'Akarai',
           short_name: 'Akarai',
           description: 'Property & Rent Management',
           theme_color: '#0145F2',
           background_color: '#FFFFFF',
           display: 'standalone',
-          start_url: '/',
-          scope: '/',
+          start_url: base,
+          scope: base,
           icons: [
             {
-              src: '/akarai-icon-192.png',
+              src: `${base}akarai-icon-192.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/akarai-icon-512.png',
+              src: `${base}akarai-icon-512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/akarai-maskable-192.png',
+              src: `${base}akarai-maskable-192.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'maskable',
             },
             {
-              src: '/akarai-maskable-512.png',
+              src: `${base}akarai-maskable-512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
             },
             {
-              src: '/akarai-icon-1024.png',
+              src: `${base}akarai-icon-1024.png`,
               sizes: '1024x1024',
               type: 'image/png',
               purpose: 'any',
@@ -77,7 +79,11 @@ export default defineConfig(() => {
         },
         workbox: {
           maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-          globPatterns: ['**/*.{js,css,html,ico,png,svg,woff,woff2}'],
+          globPatterns: ['**/*.{js,css,html,ico,png,jpg,jpeg,webp,woff,woff2}'],
+          globIgnores: ['assets/aistudio/**', '404.html', 'icon.svg', 'akarai-icon-raster-wrapper.svg'],
+          navigateFallback: `${base}index.html`,
+          navigateFallbackDenylist: [/^\/api\//],
+          cleanupOutdatedCaches: true,
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -126,6 +132,11 @@ export default defineConfig(() => {
           const distAssets = path.resolve(distDir, 'src/assets');
           if (fs.existsSync(distDir) && fs.existsSync(srcAssets)) {
             fs.cpSync(srcAssets, distAssets, {recursive: true, force: true});
+          }
+          // Prune unused design-review reference uploads from the production Pages bundle
+          const distReferenceUploads = path.resolve(distDir, 'assets/aistudio');
+          if (fs.existsSync(distReferenceUploads)) {
+            fs.rmSync(distReferenceUploads, {recursive: true, force: true});
           }
         },
       },

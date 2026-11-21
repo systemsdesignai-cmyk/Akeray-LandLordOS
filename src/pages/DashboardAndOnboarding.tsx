@@ -36,6 +36,7 @@ import {
 import type { QuickAddTab } from '../components/QuickAddModal';
 import { tFormat, useLanguagePreference } from '../components/DesignSystem';
 import { db } from '../db/database';
+import { resolveAssetUrl } from '../utils/assetUrl';
 
 /**
  * Crisp Waving Hand SVG matching the warm golden hand icon in the Home greeting
@@ -474,7 +475,7 @@ export const WelcomeOnboardingScreen: React.FC<{
       <div className="relative overflow-hidden rounded-[24px] bg-[#FFFFFF] border border-[#E6ECF3] dark:border-[#262B31] px-6 pt-7 pb-10 text-center shadow-[0_4px_20px_rgba(11,27,59,0.06)] transition-all duration-500 motion-reduce:transition-none">
         <div className="relative z-10 flex flex-col items-center">
           <img
-            src="/akarai-logo-vertical.png"
+            src={resolveAssetUrl('akarai-logo-vertical.png')}
             alt="Akarai — Property & Rent Management"
             className="w-[186px] sm:w-[210px] h-auto object-contain select-none transition-transform duration-500 ease-out motion-reduce:transition-none"
             draggable={false}

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from './db/database';
 import { seedSampleData } from './db/sampleData';
 import { AppShell } from './components/AppShell';
 import { QuickAddModal, type QuickAddTab } from './components/QuickAddModal';
 import { AkaraiKeyboard } from './keyboard/AkaraiKeyboard';
+import { resolveAssetUrl } from './utils/assetUrl';
 import {
   DashboardScreen,
   SignInAccountStateScreen,
@@ -137,7 +138,7 @@ export default function App() {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center gap-3 bg-[#FFFFFF] dark:bg-black text-[#0B1B3B] dark:text-white">
         <img
-          src="/akarai-symbol.png"
+          src={resolveAssetUrl('akarai-symbol.png')}
           alt="Akarai"
           className="w-14 h-14 object-contain rounded-[14px]"
         />
@@ -497,6 +498,7 @@ export default function App() {
               />
             }
           />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
 
         <QuickAddModal
